@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'meeting_screen.dart';
 
 class HomeScreen extends useEffect {
   final String token;
@@ -48,6 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildCard("PV (Personal)", "${_profile!['wallet']['PVBalance']}", Colors.green),
                 _buildCard("GV (Group)", "${_profile!['wallet']['GVBalance']}", Colors.orange),
                 _buildCard("COMMISSION", "฿${_profile!['wallet']['CommissionBalance']}", Colors.amber),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MeetingScreen(username: _profile!['user']['Username'])),
+                    ),
+                    icon: const Icon(Icons.videocam),
+                    label: const Text('JOIN SECRET MEETING'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
+                  ),
+                ),
               ],
             ),
     );
