@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Database: PostgreSQL
+  # 1. Databases
   postgres:
     image: postgres:16-alpine
     container_name: warroom_postgres
@@ -16,7 +16,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/init.sql
 
-  # Database: MongoDB
   mongodb:
     image: mongo:7.0
     container_name: warroom_mongo
@@ -29,7 +28,6 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  # Cache: Redis
   redis:
     image: redis:7-alpine
     container_name: warroom_redis
@@ -39,21 +37,40 @@ services:
     volumes:
       - redis_data:/data
 
-  # Application Placeholders (To be uncommented when Dockerfiles are ready)
-  # backend:
-  #   build: ./backend
+  # 2. Core Backend (Go)
+  backend:
+    build: ./backend
+    container_name: warroom_backend
+    restart: always
+    environment:
+      DB_HOST: postgres
+      DB_USER: admin
+      DB_PASS: password
+      DB_NAME: warroom_db
+      REDIS_HOST: redis
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+
+  # 3. AI Service (Python)
+  ai-service:
+    build: ./ai-service
+    container_name: warroom_ai
+    restart: always
+    environment:
+      MONGO_HOST: mongodb
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+  # 4. Frontend (Next.js) - Optional for Dev
+  # frontend:
+  #   build: ./frontend
   #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  
-  # ai-service:
-  #   build: ./ai-service
-  #   ports:
-  #     - "8000:8000"
-  #   depends_on:
-  #     - mongodb
+  #     - "3000:3000"
 
 volumes:
   postgres_data:

@@ -99,3 +99,21 @@ func Login(c *fiber.Ctx) error {
 		"token": t,
 	})
 }
+
+func GetProfile(c *fiber.Ctx) error {
+	userID := c.Locals("user_id").(string) // Middleware should set this
+
+	var user models.User
+	if err := db.DB.Preload("Wallet").First(&user, "id = ?", userID).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
+	}
+
+	// Ensure wallet exists (if not created by hook/transaction)
+	var wallet models.Wallet
+	db.DB.Where("user_id = ?", user.ID).FirstOrCreate(&wallet, models.Wallet{UserID: user.ID})
+
+	return c.JSON(fiber.Map{
+		"user":   user,
+		"wallet": wallet,
+	})
+}

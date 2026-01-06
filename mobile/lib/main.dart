@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const WarRoomApp());
@@ -15,11 +16,7 @@ class WarRoomApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('War Room Mobile App Initialized'),
-        ),
-      ),
+      home: const LoginScreen(),
     );
   }
 }
