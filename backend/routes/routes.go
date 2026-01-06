@@ -13,4 +13,8 @@ func SetupRoutes(app *fiber.App) {
 	auth := api.Group("/auth")
 	auth.Post("/register", handlers.Register)
 	auth.Post("/login", handlers.Login)
+
+	// MLM Routes
+	mlm := api.Group("/mlm")
+	mlm.Post("/purchase", handlers.Purchase)
 }
