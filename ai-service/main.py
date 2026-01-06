@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from routers import analysis
 
 app = FastAPI(title="War Room AI Service", version="1.0.0")
+
+# Include Routers
+app.include_router(analysis.router)
 
 class HealthCheck(BaseModel):
     status: str
