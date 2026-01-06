@@ -9,6 +9,9 @@ import (
 )
 
 func main() {
+	// Connect to Database
+	db.Connect()
+
 	// Initialize Fiber app
 	app := fiber.New()
 
@@ -16,10 +19,8 @@ func main() {
 	app.Use(logger.New())
 	app.Use(cors.New())
 
-	// Routes
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("War Room Backend Service is Running")
-	})
+	// Setup Routes
+	routes.SetupRoutes(app)
 
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
