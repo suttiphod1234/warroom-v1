@@ -25,7 +25,9 @@ func Connect() {
 }
 
 func Migrate() {
-	// AutoMigrate logic will go here once models are defined
-	// DB.AutoMigrate(&User{}, &Transaction{})
-	fmt.Println("✅ Database Migration Completed")
+	err := DB.AutoMigrate(&models.User{}, &models.Wallet{}, &models.Transaction{})
+	if err != nil {
+		log.Fatal("❌ Database Migration Failed: ", err)
+	}
+	fmt.Println("✅ Database Migration Completed: Users, Wallets, Transactions")
 }
