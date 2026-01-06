@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'meeting_screen.dart';
 
-class HomeScreen extends useEffect {
+class HomeScreen extends StatefulWidget {
   final String token;
   const HomeScreen({super.key, required this.token});
 
