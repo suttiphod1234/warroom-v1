@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Database: PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: warroom_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: warroom_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # Database: MongoDB
+  mongodb:
+    image: mongo:7.0
+    container_name: warroom_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # Cache: Redis
+  redis:
+    image: redis:7-alpine
+    container_name: warroom_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # Application Placeholders (To be uncommented when Dockerfiles are ready)
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  
+  # ai-service:
+  #   build: ./ai-service
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - mongodb
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:

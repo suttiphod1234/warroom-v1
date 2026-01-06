@@ -1,0 +1,45 @@
+# General
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Docker
+docker-data/
+postgres_data/
+mongo_data/
+redis_data/
+
+# Backend (Go)
+backend/bin/
+backend/vendor/
+backend/go.sum
+backend/.env
+
+# AI Service (Python)
+ai-service/__pycache__/
+ai-service/*.pyc
+ai-service/venv/
+ai-service/.env
+ai-service/.pytest_cache/
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Mobile (Flutter)
+mobile/.dart_tool/
+mobile/.packages
+mobile/.pub/
+mobile/build/
+mobile/ios/Flutter/App.framework
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/ServiceDefinitions.json
+mobile/android/local.properties
