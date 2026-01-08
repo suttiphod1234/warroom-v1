@@ -6,24 +6,52 @@ export default function HomePage() {
     const router = useRouter()
 
     return (
-        <div className="min-h-screen bg-black text-white flex items-center justify-center">
-            <div className="text-center max-w-4xl px-4">
-                <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '20px'
+        }}>
+            <div style={{ maxWidth: '800px' }}>
+                <h1 style={{
+                    fontSize: '4rem',
+                    fontWeight: 'bold',
+                    marginBottom: '1.5rem',
+                    background: 'linear-gradient(to right, #60a5fa, #a78bfa, #f472b6)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                }}>
                     WAR ROOM V1
                 </h1>
 
-                <p className="text-xl md:text-2xl text-gray-300 mb-8">
-                    ระบบบริหารจัดการเครือข่ายการเมือง พร้อม AI วิเคราะห์ความเห็น
+                <p style={{
+                    fontSize: '1.5rem',
+                    color: '#d1d5db',
+                    marginBottom: '2rem'
+                }}>
+                    ระบบบริหารจัดการเครือข่ายการเมือง พร้อม AI
                 </p>
 
-                <div className="flex gap-4 justify-center">
-                    <button
-                        onClick={() => router.push('/login')}
-                        className="px-8 py-4 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold text-lg transition transform hover:scale-105"
-                    >
-                        เริ่มใช้งาน →
-                    </button>
-                </div>
+                <button
+                    onClick={() => router.push('/login')}
+                    style={{
+                        padding: '1rem 2rem',
+                        background: '#2563eb',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '0.5rem',
+                        fontSize: '1.125rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                    }}
+                    onMouseOver={(e) => e.target.style.background = '#1d4ed8'}
+                    onMouseOut={(e) => e.target.style.background = '#2563eb'}
+                >
+                    เริ่มใช้งาน →
+                </button>
             </div>
         </div>
     )

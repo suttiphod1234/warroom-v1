@@ -1,42 +1,100 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const router = useRouter()
 
-    const handleLogin = async (e) => {
+    const handleLogin = (e) => {
         e.preventDefault()
-        alert('Backend not deployed yet. Demo only.')
+        alert('Backend not deployed yet. This is a demo.')
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
-            <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700">
-                <h2 className="text-3xl font-bold text-center text-blue-500">WAR ROOM ACCESS</h2>
-                <form onSubmit={handleLogin} className="space-y-4">
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#111827'
+        }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '28rem',
+                padding: '2rem',
+                background: '#1f2937',
+                borderRadius: '0.75rem',
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #374151'
+            }}>
+                <h2 style={{
+                    fontSize: '1.875rem',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    color: '#3b82f6',
+                    marginBottom: '1.5rem'
+                }}>
+                    WAR ROOM ACCESS
+                </h2>
+
+                <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div>
-                        <label className="block text-sm font-medium">Username</label>
+                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.25rem' }}>
+                            Username
+                        </label>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded focus:ring-2 focus:ring-blue-500 outline-none text-white"
+                            style={{
+                                width: '100%',
+                                padding: '0.5rem 1rem',
+                                background: '#374151',
+                                border: '1px solid #4b5563',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                outline: 'none'
+                            }}
                         />
                     </div>
+
                     <div>
-                        <label className="block text-sm font-medium">Password</label>
+                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.25rem' }}>
+                            Password
+                        </label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 bg-gray-700 border border-gray-600 rounded focus:ring-2 focus:ring-blue-500 outline-none text-white"
+                            style={{
+                                width: '100%',
+                                padding: '0.5rem 1rem',
+                                background: '#374151',
+                                border: '1px solid #4b5563',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                outline: 'none'
+                            }}
                         />
                     </div>
-                    <button type="submit" className="w-full py-3 font-bold bg-blue-600 hover:bg-blue-700 rounded transition duration-200">
+
+                    <button
+                        type="submit"
+                        style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            background: '#2563eb',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '0.375rem',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            transition: 'background 0.2s'
+                        }}
+                        onMouseOver={(e) => e.target.style.background = '#1d4ed8'}
+                        onMouseOut={(e) => e.target.style.background = '#2563eb'}
+                    >
                         ENTER WAR ROOM
                     </button>
                 </form>
